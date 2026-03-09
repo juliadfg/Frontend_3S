@@ -92,6 +92,7 @@ def funcionarios():
     funcionarios_sql = select(Funcionario)
     funcionarios_resultado = db_session.execute(funcionarios_sql).scalars().all()
     return render_template("funcionarios.html")
+
 @app.route('/operacoes')
 def operacoes():
     return render_template("operacoes.html")

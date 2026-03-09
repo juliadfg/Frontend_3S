@@ -5,6 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from werkzeug.security import generate_password_hash, check_password_hash
 
 #base de dados
+
 engine = create_engine('mysql+pymysql://root:senaisp@localhost:3306/empresa_db')
 
 #sql LITE - MIGUELITO
