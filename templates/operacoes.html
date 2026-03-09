@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<h1>Operações Aritméticas</h1>
+
+
+<!--passo2: verifica se possui mensagens enviadas pelo app-->
+<!--passo 3: definir with_categories=true caso queira ter acesso as categorias -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-error px-3">
+                <!-- percorrer a lista de msg -->
+                {% for category, message in messages %}
+                <!-- passo 5: criar um card filho -->
+                    <div class="alert {{ category }} alert-dismissible fade show px-5" role="alert">
+                      <strong>{{ message }}</strong>.
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+<div class="calculos">
+
+    <div class="card_operacao">
+        <h2>Adição</h2>
+        <form class="form-somar" action="{{ url_for('somar') }}" method="post">
+            <label>
+                <input placeholder="Digite um número" name="form-n1" class="form-control w-100">
+            </label>
+
+            <p class="operador">+</p>
+
+            <label>
+                <input placeholder="Digite um número" name="form-n2" class="form-control">
+            </label>
+
+            <p class="resultado">
+                {% if soma is defined %}
+                    {{ n1 }} + {{ n2 }} = {{ soma }}
+                {% else %}
+                {% endif %}
+            </p>
+
+            <button type="submit" class="btn btn-warning">Somar</button>
+        </form>
+
+    </div>
+
+    <div class="card_operacao">
+        <h2>Subtração</h2>
+        <form class="form-subtracao" action="{{ url_for('subtracao') }}" method="post">
+            <label>
+                <input placeholder="Digite um número" name="form-n1" class="form-control w-100">
+            </label>
+
+            <p class="operador">-</p>
+
+            <label>
+                <input placeholder="Digite um número" name="form-n2" class="form-control">
+            </label>
+
+            <p class="resultado">
+                {% if subtracao is defined %}
+                    {{ n1 }} - {{ n2 }} = {{ subtracao }}
+                {% else %}
+                {% endif %}
+            </p>
+
+            <button type="submit" class="btn btn-warning">Subtrair</button>
+        </form>
+
+    </div>
+
+
+    <div class="card_operacao">
+        <h2>Multiplicação</h2>
+        <form class="form-multiplicacao" action="{{ url_for('multiplicar') }}" method="post">
+            <label>
+                <input placeholder="Digite um número" name="form-n1" class="form-control">
+            </label>
+
+            <p class="operador">*</p>
+
+            <label>
+                <input placeholder="Digite um número" name="form-n2" class="form-control">
+            </label>
+
+            <p class="resultado">
+                {% if multiplicar is defined %}
+                    {{ n1 }} * {{ n2 }} = {{ multiplicar }}
+                {% else %}
+                {% endif %}
+            </p>
+
+             <button type="submit" class="btn btn-warning">Multiplicar</button>
+        </form>
+
+
+    </div>
+
+
+    <div class="card_operacao">
+        <h2>Divisão</h2>
+        <form class="form-multiplicacao" action="{{ url_for('dividir') }}" method="post">
+            <label>
+                <input placeholder="Digite um número" name="form-n1" class="form-control">
+            </label>
+
+            <p class="operador">/</p>
+
+            <label>
+                <input placeholder="Digite um número" name="form-n2" class="form-control">
+            </label>
+
+            <p class="resultado">
+                {% if dividir is defined %}
+                    {{ n1 }} / {{ n2 }} = {{ dividir }}
+                {% else %}
+                {% endif %}
+            </p>
+
+             <button type="submit" class="btn btn-warning">Dividir</button>
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

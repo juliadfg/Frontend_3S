@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class="carrosel d-flex overflow-hidden">
+
+    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active bg-dark" data-bs-interval="2000">
+                <img src="../static/img/bolo1.jpg" height="100%" width="100%" class="d-block w-100 opacity-50">
+            </div>
+            <div class="carousel-item active bg-dark" data-bs-interval="2000">
+                <img src="../static/img/bolo2.jpg" height="100%" width="100%" class="d-block w-100 opacity-50">
+            </div>
+            <div class="carousel-item active bg-dark" data-bs-interval="2000">
+                <img src="../static/img/bolo3.jpg" height="100%" width="100%" class="d-block w-100 opacity-50">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+</div>
+
+<div class="cursos">
+    <div class="curso-text col-8 d-flex flex-column justify-content-center align-items-center">
+
+        <h1 class="title1">Curso Cupcakes</h1>
+        <p>Os cursos de cupcake oferecem uma variedade de técnicas e receitas para criar deliciosos e personalizados
+            cupcakes. Os alunos aprendem a preparar massas, coberturas, recheios e decorações, além de técnicas de
+            confeitaria criativa e armazenamento. Os certificados de conclusão são valorizados no mercado e podem ser
+            impressos ou enviados para casa. Os cursos são totalmente online, permitindo que os alunos aprendam a
+            qualquer hora e em qualquer lugar.</p>
+    </div>
+
+
+    <div class="curso-img bg-dark col-4">
+        <img src="/static/img/pexels-eira-2525682.jpg" class="w-100 h-100">
+    </div>
+
+</div>
+<div class="cursos">
+
+    <div class="curso-img bg-dark col-4">
+        <img src="/static/img/recheiobolo.jpg" class="w-100 h-100">
+    </div>
+
+    <div class="curso-text col-8 d-flex flex-column justify-content-center align-items-center">
+
+        <h1 class="title2">Curso recheios</h1>
+        <p>Os cursos de recheio de bolo oferecem uma abordagem prática e detalhada sobre como preparar recheios de
+            diversos sabores e tamanhos. Desde os recheios mais tradicionais, como brigadeiro e doce de leite, até
+            opções mais elaboradas. O curso também aborda técnicas de decoração e apresentação dos bolos, o que é
+            fundamental para quem deseja se destacar no mercado de confeitaria.</p>
+    </div>
+
+</div>
+
+{% endblock %}

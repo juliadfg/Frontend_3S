@@ -1,0 +1,301 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class="h1">
+    <h1>Geometria</h1>
+</div>
+
+<div class="h2">
+    <h2>Triângulo Equilátero</h2>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-error px-3">
+                {% for category, message in messages %}
+                    <div class="alert {{ category }} alert-dismissible fade show px-5" role="alert">
+                      <strong>{{ message }}</strong>.
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+<div class="calculos">
+
+    <div class="card_triangulo">
+        <h2>Perimetro do triângulo</h2>
+        <form class="form-somar" action="{{ url_for('triangulo_perimetro') }}" method="post">
+            <label>
+                <input placeholder="Digite um número" name="form-n1" class="form-control w-100">
+            </label>
+            <p class="resultado">
+                {% if triangulo_perimetro is defined %}
+                     {{ n1 }} X {{ n2 }} = {{ triangulo_perimetro }}
+                {% else %}
+                {% endif %}
+            </p>
+
+            <button type="submit" class="btn btn-warning">Descobrir perimetro</button>
+        </form>
+        <div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        Como calcular?
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <p>Para calcular o perímetro de um triângulo equilátero, multiplique a medida de um de seus lados por 3, pois todos os três lados são iguais (\(P=3\times L\)). Se um triângulo tem lados de 5 cm, o perímetro é \(5+5+5=15\text{\ cm}\) ou \(3\times 5=15\text{\ cm}\). </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+
+     <div class="card_triangulo">
+        <h2>Área do triângulo</h2>
+        <form class="form-somar" action="{{ url_for('triangulo_area') }}" method="post">
+            <label>
+                <input placeholder="Digite um número" name="form-n1" class="form-control w-100">
+            </label>
+             <label>
+                <input placeholder="Digite um número" name="form-n2" class="form-control w-100">
+            </label>
+            <p class="resultado">
+                {% if triangulo_area is defined %}
+                     {{ n1 }} X {{ n2 }} / {{ n3 }} = {{ triangulo_area }}
+                {% else %}
+                {% endif %}
+            </p>
+
+            <button type="submit" class="btn btn-warning">Descobrir área</button>
+        </form>
+                <div class="accordion" id="accordionExample1">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree1" aria-expanded="false" aria-controls="collapseThree1">
+        Como calcular
+      </button>
+    </h2>
+    <div id="collapseThree1" class="accordion-collapse collapse" data-bs-parent="#accordionExample1">
+      <div class="accordion-body">
+        <p>Para calcular a área de um triângulo equilátero, use a fórmula A = (L² * √3) / 4, onde "L" é o comprimento do lado do triângulo; basta elevar o lado ao quadrado, multiplicar pela raiz de 3 e dividir por 4, sendo necessário apenas saber a medida do lado.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<div class="h2">
+    <h2>Circulo </h2>
+</div>
+<div class="calculos">
+    <div class="card_triangulo">
+        <h2>Perimetro do circulo</h2>
+        <form class="form-somar" action="{{ url_for('circulo_perimetro') }}" method="post">
+            <label>
+                <input placeholder="Digite um número" name="form-n9" class="form-control w-100">
+            </label>
+            <p class="resultado">
+                {% if circulo_perimetro is defined %}
+                     {{ n7 }} X {{ n8 }} X {{ n9 }} = {{ circulo_perimetro }}
+                {% else %}
+                {% endif %}
+            </p>
+
+            <button type="submit" class="btn btn-warning">Descobrir perimetro</button>
+        </form>
+               <div class="accordion" id="accordionExample2">
+    <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree2" aria-expanded="false" aria-controls="collapseThree2">
+        Como calcular
+      </button>
+    </h2>
+    <div id="collapseThree2" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
+      <div class="accordion-body">
+        <p>Para calcular o perímetro de um círculo (também conhecido como comprimento da circunferência), utiliza-se o valor do raio ou do diâmetro multiplicado por uma constante matemática chamada Pi (\(\pi \), que vale aproximadamente \(3,14159\)). </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <div class="card_triangulo">
+        <h2>Área do circulo</h2>
+            <form class="form-somar" action="{{ url_for('circulo_area') }}" method="post">
+                <label>
+                    <input placeholder="Digite um número" name="form-n1" class="form-control w-100">
+                </label>
+                    <p class="resultado">
+                        {% if circulo_area is defined %}
+                             {{ n1 }}  = {{ circulo_area }}
+                        {% else %}
+                        {% endif %}
+                    </p>
+
+                <button type="submit" class="btn btn-warning">Descobrir área</button>
+            </form>
+             <div class="accordion" id="accordionExample3">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree3" aria-expanded="false" aria-controls="collapseThree3">
+        Como calcular?
+      </button>
+    </h2>
+    <div id="collapseThree3" class="accordion-collapse collapse" data-bs-parent="#accordionExample3">
+      <div class="accordion-body">
+        <p>Para calcular a área de um círculo, utilize a fórmula \(A=\pi \times r^{2}\), multiplicando o valor de \(\pi \) (aproximadamente \(3,14159\)) pelo raio ao quadrado.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+</div>
+
+<div class="h2">
+    <h2>Quadrado</h2>
+</div>
+
+<div class="calculos">
+
+        <div class="card_triangulo">
+                <h2>Perimetro do quadrado</h2>
+                <form class="form-somar" action="{{ url_for('quadrado_perimetro') }}" method="post">
+                    <label>
+                        <input placeholder="Digite um número" name="form-n1" class="form-control w-100">
+                    </label>
+                    <p class="resultado">
+                        {% if  quadrado_perimetro is defined %}
+                             {{ n1 }} X {{ n2 }} = {{ quadrado_perimetro }}
+                        {% else %}
+                        {% endif %}
+                    </p>
+                    <button type="submit" class="btn btn-warning">Descobrir perimetro</button>
+                </form>
+                 <div class="accordion" id="accordionExample4">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree4" aria-expanded="false" aria-controls="collapseThree4">
+        Como calcular?
+      </button>
+    </h2>
+    <div id="collapseThree4" class="accordion-collapse collapse" data-bs-parent="#accordionExample4">
+      <div class="accordion-body">
+        <p>O perímetro de um quadrado é calculado somando a medida dos seus quatro lados iguais, ou multiplicando a medida de um lado por 4. A fórmula é \(P=4\times l\), onde \(P\) é o perímetro e \(l\) é o comprimento do lado. </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+        <div class="card_triangulo">
+                <h2>Área do quadrado</h2>
+                    <form class="form-somar" action="{{ url_for('quadrado_area') }}" method="post">
+                        <label>
+                            <input placeholder="Digite um número" name="form-n1" class="form-control w-100">
+                        </label>
+                        <label>
+                            <input placeholder="Digite um número" name="form-n2" class="form-control w-100">
+                        </label>
+                            <p class="resultado">
+                                {% if quadrado_area is defined %}
+                                     {{ n1 }} X {{ n2 }} = {{ quadrado_area }}
+                                {% else %}
+                                {% endif %}
+                            </p>
+                        <button type="submit" class="btn btn-warning">Descobrir área</button>
+                    </form>
+                 <div class="accordion" id="accordionExample5">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree5" aria-expanded="false" aria-controls="collapseThree5">
+        Como calcular?
+      </button>
+    </h2>
+    <div id="collapseThree5" class="accordion-collapse collapse" data-bs-parent="#accordionExample5">
+      <div class="accordion-body">
+        <p>Para calcular a área de um quadrado, multiplique a medida do lado por ela mesma (lado \(\times \) lado ou \(lado^{2}\)). Como todos os quatro lados de um quadrado são iguais, a fórmula é simples: Área = \(L^{2}\), onde '\(L\)' é a medida do lado. </p>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+
+</div>
+
+<div class="h2">
+    <h2>Hexágono</h2>
+</div>
+
+<div class="calculos">
+
+        <div class="card_triangulo">
+                <h2>Perimetro do hexágono</h2>
+                <form class="form-somar" action="{{ url_for('hexagono_perimetro') }}" method="post">
+                    <label>
+                        <input placeholder="Digite um número" name="form-n1" class="form-control w-100">
+                    </label>
+                    <p class="resultado">
+                        {% if hexagono_perimetro is defined %}
+                             {{ n1 }} X {{ n2 }} = {{ hexagono_perimetro }}
+                        {% else %}
+                        {% endif %}
+                    </p>
+                    <button type="submit" class="btn btn-warning">Descobrir perimetro</button>
+                </form>
+            <div class="accordion" id="accordionExampl6">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree6" aria-expanded="false" aria-controls="collapseThree6">
+        Como calcular?
+      </button>
+    </h2>
+    <div id="collapseThree6" class="accordion-collapse collapse" data-bs-parent="#accordionExample6">
+      <div class="accordion-body">
+        <p>O perímetro de um hexágono é calculado somando as medidas dos seus seis lados. O método exato depende se o hexágono é regular (todos os lados iguais) ou irregular (lados com medidas diferentes). </p>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+        <div class="card_triangulo">
+                <h2>Área do hexágono</h2>
+                    <form class="form-somar" action="{{ url_for('hexagono_area') }}" method="post">
+                        <label>
+                            <input placeholder="Digite um número" name="form-n1" class="form-control w-100">
+                        </label>
+                            <p class="resultado">
+                                {% if hexagono_area is defined %}
+                                    {{ hexagono_area }}
+                                {% else %}
+                                {% endif %}
+                            </p>
+                        <button type="submit" class="btn btn-warning">Descobrir área</button>
+                    </form>
+            <div class="accordion" id="accordionExample7">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree7" aria-expanded="false" aria-controls="collapseThree7">
+        Como calcular?
+      </button>
+    </h2>
+    <div id="collapseThree7" class="accordion-collapse collapse" data-bs-parent="#accordionExample7">
+      <div class="accordion-body">
+        <p>A área de um hexágono regular (lados iguais) é calculada pela fórmula \(A=\frac{3\cdot l^{2}\cdot \sqrt{3}}{2}\), onde '\(l\)' é o comprimento do lado. Alternativamente, multiplica-se a área de um dos seis triângulos equiláteros internos por seis.</p>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+</div>
+
+{% endblock %}
