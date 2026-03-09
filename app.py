@@ -6,6 +6,7 @@ from flask_login import LoginManager, login_required, login_user, logout_user, c
 
 app = Flask(__name__)
 # mover para .env
+
 app.config['SECRET_KEY'] = '1234'
 
 login_manager = LoginManager(app)
