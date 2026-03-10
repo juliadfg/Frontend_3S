@@ -1,22 +1,74 @@
-{%  extends "base.html"  %}
+{% extends 'base.html' %}
 
 {% block conteudo %}
-<form action="{{ url_for('login')}}" method="post">
-    <label>
-      email:
-      <input type="text" name="form-email">
-    </label>
-    <label>
-      senha:
-      <input type="password" name="form-senha">
-      <button type="submit" class="btn-login">Log in</button>
-    </label>
-</form>
-<div>
-  <a href="{{ url_for('cadastro_funcionario')}}">
-    Não tem conta? Registre_se
-  </a>
+
+<div class="pai_login">
+    <div class="card_login">
+        <form id="form_login" class="form-somar" action="{{url_for('login')}}" method="post">
+            <h3>Login</h3>
+            <label for="input_email"> Email: </label>
+            <input placeholder="Digite o email" name="form-email" type="email" id="input_email"
+                   class="form-control w-100">
+
+            <label for="input_senha">Senha:</label>
+            <input placeholder="Digite a senha" name="form-senha" type="password" id="input_senha"
+                   class="form-control w-100">
+
+            <button type="submit" class="btn btn-info">Entrar</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Cadastrar
+            </button>
+            <a class="btn btn-danger my-2" onclick="limpaInputsLogin()">Cancelar</a>
+
+        </form>
+    </div>
 </div>
 
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ url_for('cadastrar') }}" method="post">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Nova conta</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="input_nome">Nome:</label>
+                    <input id="input_nome" placeholder="Digite o nome" type="text" name="form-nome"
+                           class="form-control w-100" required>
+
+                    <label for="input_data">Data de nascimento:</label>
+                    <input id="input_data" type="date" name="form-nascimento" class="form-control w-100" required>
+
+                    <label for="input_cpf"> CPF:</label>
+                    <input id="input_cpf" placeholder="Digite o CPF" type="text" name="form-cpf"
+                           class="form-control w-100" required>
+
+                    <label for="input_email_c">Email:</label>
+                    <input id="input_email_c" placeholder="Digite o Email" type="email" name="form-email"
+                           class="form-control w-100" required>
+
+                    <label for="input_senha_c">Senha:</label>
+                    <input id="input_senha_c" placeholder="Digite a senha" type="password" name="form-senha"
+                           class="form-control w-100" required>
+
+                    <label for="input_cargo">Cargo:</label>
+                    <input id="input_cargo" placeholder="Digite o Cargo" type="text" name="form-cargo"
+                           class="form-control w-100">
+
+                    <label for="input_salario">Salário:</label>
+                    <input id="input_salario" placeholder="Digite o salário" type="text"  name="form-salario"
+                           class="form-control w-100">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-info">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

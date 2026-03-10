@@ -12,9 +12,11 @@ app.config['SECRET_KEY'] = '1234'
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
+
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db_session.remove()
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -22,84 +24,21 @@ def load_user(user_id):
     resultado = db_session.execute(user).scalar_one_or_none()
     return resultado
 
-@app.route('/login', methods=['GET','POST'])
-def login():
-    if request.method == 'POST':
-        email = request.form['form-email']
-        senha = request.form['form-senha']
-
-        if email and senha:
-            verificar_email = select(Funcionario).where(Funcionario.email == email)
-            resultado_email = db_session.execute(verificar_email).scalar_one_or_none()
-
-            if resultado_email:
-                if resultado_email.check_password(senha):
-                    login_user(resultado_email)
-                    flash(f'Logado com sucesso!', 'sucess')
-                    return redirect(url_for('index'))
-                else:
-                    flash('Senha incorreto!', 'danger')
-                    return render_template('login.html')
-            else:
-                flash('Email não encontrado')
-                return render_template('login.html')
-        else:
-            flash('Preencher os campos!', 'danger')
-            return render_template('login.html')
-
-    return render_template('login.html')
-
-@app.route('/cadastro_funcionario', methods=['GET', 'POST'])
-def cadastro_funcionario(MySQLchemyError=None):
-    if request.method == 'POST':
-        nome = request.form['nome']
-        senha = request.form['senha']
-        email = request.form['email']
-        if not nome or not senha or not email:
-            flash('Preencher todos os campos!, danger')
-            return render_template('cadastro.html')
-        verificar_email = select(Funcionario).where(Funcionario.email == email)
-        existe_email = db_session.execute(verificar_email).scalars_one_or_none()
-        if existe_email:
-            flash(f'Email {email} ja esta cadastrado!, danger')
-            return render_template('cadastro.html')
-        try:
-            novo_func = Funcionario(nome=nome, email=email)
-            novo_func.set_password(senha)
-            db_session.add(novo_func)
-            db_session.commit()
-            flash(f'Funcionario {nome} cadastrado com sucesso!', 'sucess')
-            return redirect(url_for('login'))
-        except MySQLchemyError as e:
-            flash(f'Erro na base de dados ao cadastrar!', 'danger')
-            print(f'Erro na base de dados ao cadastrar!')
-            return redirect(url_for('cadastro_funcionario'))
-        except Exception as e:
-            flash(f'Erro ao cadastrar!', 'danger')
-            print(f'Erro ao cadastrar usuario!')
-            return redirect(url_for('cadastro_funcionario'))
-    return render_template('cadastro.html')
 
 @app.route('/')
 def home():
     return render_template("home.html")
 
+
 @app.route('/calculos')
 def calculos():
     return render_template("calculos.html")
 
-@app.route('/funcionarios', methods=['GET', 'POST'])
-def funcionarios():
-    funcionarios_sql = select(Funcionario)
-    funcionarios_resultado = db_session.execute(funcionarios_sql).scalars().all()
-    return render_template("funcionarios.html")
 
 @app.route('/operacoes')
 def operacoes():
     return render_template("operacoes.html")
-@app.route('/geometria')
-def geometria():
-    return render_template("geometria.html")
+
 
 @app.route('/somar', methods=['GET', 'POST'])
 def somar():
@@ -115,6 +54,7 @@ def somar():
 
     return render_template("operacoes.html")
 
+
 @app.route('/subtracao', methods=['GET', 'POST'])
 def subtracao():
     if request.method == 'POST':
@@ -126,8 +66,8 @@ def subtracao():
             return render_template("operacoes.html", n1=n1, n2=n2, subtracao=subtracao)
         else:
             flash("Preencha o campo para realizar a subtração", 'alert-danger')
+        return render_template("operacoes.html")
 
-    return render_template("operacoes.html")
 
 @app.route('/multiplicar', methods=['GET', 'POST'])
 def multiplicar():
@@ -140,8 +80,8 @@ def multiplicar():
             return render_template("operacoes.html", n1=n1, n2=n2, multiplicar=multiplicar)
         else:
             flash("Preencha o campo para realizar a multiplicação", 'alert-danger')
+        return render_template("operacoes.html")
 
-    return render_template("operacoes.html")
 
 @app.route('/dividir', methods=['GET', 'POST'])
 def dividir():
@@ -154,13 +94,18 @@ def dividir():
             return render_template("operacoes.html", n1=n1, n2=n2, dividir=dividir)
         else:
             flash("Preencha o campo para realizar a divisão", 'alert-danger')
+        return render_template("operacoes.html")
 
-    return render_template("operacoes.html")
+
+@app.route('/geometria')
+def geometria():
+    return render_template("geometria.html")
+
 
 @app.route('/triangulo_perimetro', methods=['GET', 'POST'])
 def triangulo_perimetro():
     if request.method == 'POST':
-        if request.form['form-n1'] :
+        if request.form['form-n1']:
             n1 = int(request.form['form-n1'])
             n2 = 3
             triangulo_perimetro = n1 * n2
@@ -171,13 +116,14 @@ def triangulo_perimetro():
 
     return render_template("geometria.html")
 
+
 @app.route('/triangulo_area', methods=['GET', 'POST'])
 def triangulo_area():
     if request.method == 'POST':
         if request.form['form-n1'] and request.form['form-n2']:
             n1 = int(request.form['form-n1'])
             n2 = int(request.form['form-n2'])
-            n3= 2
+            n3 = 2
             triangulo_area = n1 * n2 / n3
             flash("Sucesso", 'alert-success')
             return render_template("geometria.html", n1=n1, n2=n2, n3=2, triangulo_area=triangulo_area)
@@ -186,13 +132,14 @@ def triangulo_area():
 
     return render_template("geometria.html")
 
+
 @app.route('/circulo_perimetro', methods=['GET', 'POST'])
 def circulo_perimetro():
     if request.method == 'POST':
         if request.form['form-n9']:
             n7 = 2
             n8 = 3.14
-            n9= int(request.form['form-n9'])
+            n9 = int(request.form['form-n9'])
             circulo_perimetro = n7 * n8 * n9
             flash("Sucesso", 'alert-success')
             return render_template("geometria.html", n7=2, n8=3.14, n9=n9, circulo_perimetro=circulo_perimetro)
@@ -201,11 +148,12 @@ def circulo_perimetro():
 
     return render_template("geometria.html")
 
+
 @app.route('/circulo_area', methods=['GET', 'POST'])
 def circulo_area():
     if request.method == 'POST':
         if request.form['form-n1']:
-            n1= int(request.form['form-n1'])
+            n1 = int(request.form['form-n1'])
             circulo_area = 3.14 * n1 * n1
             flash("Sucesso", 'alert-success')
             return render_template("geometria.html", n1=n1, circulo_area=circulo_area)
@@ -213,6 +161,7 @@ def circulo_area():
             flash("Preencha o campo para realizar a conta", 'alert-danger')
 
     return render_template("geometria.html")
+
 
 @app.route('/quadrado_perimetro', methods=['GET', 'POST'])
 def quadrado_perimetro():
@@ -227,6 +176,8 @@ def quadrado_perimetro():
             flash("Preencha o campo para realizar a conta", 'alert-danger')
 
     return render_template("geometria.html")
+
+
 @app.route('/quadrado_area', methods=['GET', 'POST'])
 def quadrado_area():
     if request.method == 'POST':
@@ -241,6 +192,7 @@ def quadrado_area():
 
     return render_template("geometria.html")
 
+
 @app.route('/hexagono_perimetro', methods=['GET', 'POST'])
 def hexagono_perimetro():
     if request.method == 'POST':
@@ -254,6 +206,7 @@ def hexagono_perimetro():
             flash("Preencha o campo para realizar a conta", 'alert-danger')
 
     return render_template("geometria.html")
+
 
 @app.route('/hexagono_area', methods=['GET', 'POST'])
 def hexagono_area():
@@ -271,13 +224,93 @@ def hexagono_area():
 
     return render_template("geometria.html")
 
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['form-email']
+        senha = request.form['form-senha']
+
+        if email and senha:
+            verificar_email = select(Funcionario).where(Funcionario.email == email)
+            resultado_email = db_session.execute(verificar_email).scalar_one_or_none()
+            if resultado_email:
+                if resultado_email.check_password(senha):
+                    login_user(resultado_email)
+                    flash(f'Logado com sucesso!', 'sucess')
+                    return redirect(url_for('home'))
+                else:
+                    flash('Senha incorreto!', 'danger')
+                    return redirect(url_for('login'))
+            else:
+                flash('Email não encontrado')
+                return redirect(url_for('login'))
+        else:
+            flash('Preencher os campos!', 'danger')
+            return redirect(url_for('login'))
+    return render_template('login.html')
+
+
 @app.route("/logout")
 def logout():
     logout_user()
     flash("Logout sucesso", 'alert-success')
     return redirect(url_for("login"))
 
+
+@app.route('/funcionarios', methods=['GET', 'POST'])
+@login_required
+def funcionarios():
+    funcionarios_sql = select(Funcionario)
+    funcionarios_resultado = db_session.execute(funcionarios_sql).scalars().all()
+    return render_template("funcionarios.html", lista_funcionarios=funcionarios_resultado)
+
+
+@app.route('/cadastrar', methods=['GET', 'POST'])
+def cadastrar():
+    if request.method == 'POST':
+        nome = request.form.get['form-nome']
+        senha = request.form.get['form-senha']
+        email = request.form.get['form-email']
+        salario_raw = request.form.get['form-salario']
+
+        salario_val = float(salario_raw) if salario_raw and salario_raw.strip() else 0.0
+
+        verificar_email = select(Funcionario).where(Funcionario.email == email)
+        existe_email = db_session.execute(verificar_email).scalars_one_or_none()
+
+        if existe_email:
+            flash(f'Email {email} ja esta cadastrado!, danger')
+            return redirect(url_for('funcionarios'))
+
+
+        try:
+            novo_func = Funcionario(
+                nome=nome,
+                email=email,
+                data_nascimento=request.form.get('form-nascimento'),
+                cpf=request.form.get('form-cpf'),
+                cargo=request.form.get('form-cargo'),
+                salario=salario_val
+            )
+            novo_func.set_password(senha)
+            db_session.add(novo_funcionario)
+            db_session.commit()
+            flash(f'Funcionario {nome} cadastrado!', 'success')
+        except Exception as e:
+            db_session.rollback()
+            print(f"ERRO DE DEBUG: {e}")  # Olhe o terminal aqui!
+            flash(f'Erro: {e}', 'danger')
+
+        return redirect(url_for('funcionarios'))
+
+
+@app.route('/animais')
+def animais():
+    return render_template("animais.html")
+
+
 # TODO Final do código
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000)

@@ -11,7 +11,7 @@ engine = create_engine('mysql+pymysql://root:senaisp@localhost:3306/empresa_db')
 # engine = create_engine('sqlite:///.sqlite3')
 
 #todos
-1
+
 db_session = scoped_session(sessionmaker(bind=engine))
 Base = declarative_base()
 Base.query = db_session.query_property()
