@@ -301,3 +301,101 @@ a {
     font-size: 4rem;
     user-select: none;
 }
+
+:root {
+            --bs-primary: #0e7490;
+            --bs-primary-rgb: 14, 116, 144;
+            --bs-link-color: #0e7490;
+            --bs-link-hover-color: #0891b2;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        .btn-primary {
+            background-color: var(--bs-primary);
+            border-color: var(--bs-primary);
+        }
+        .btn-primary:hover {
+            background-color: #0891b2;
+            border-color: #0891b2;
+        }
+        .breed-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            overflow: hidden;
+            background: white;
+            margin-bottom: 1.5rem;
+        }
+        .breed-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .breed-card-img-container {
+            position: relative;
+            min-height: 250px;
+        }
+        @media (min-width: 768px) {
+            .breed-card-img-container {
+                width: 30%;
+                min-height: auto;
+            }
+        }
+        .breed-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .badge-popular {
+            background-color: rgba(14, 116, 144, 0.9);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .badge-giant {
+            background-color: rgba(249, 115, 22, 0.9);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .stat-label {
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: #94a3b8;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+        .stat-value {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #334155;
+        }
+        .tag-pill {
+            background-color: #f0f9ff;
+            color: #0e7490;
+            border: 1px solid rgba(14, 116, 144, 0.1);
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+        }
+        .btn-learn-more {
+            background-color: #f1f5f9;
+            color: #334155;
+            font-weight: 700;
+            border-radius: 0.75rem;
+            border: none;
+            padding: 0.75rem 1rem;
+            transition: all 0.2s;
+        }
+        .btn-learn-more:hover {
+            background-color: var(--bs-primary);
+            color: white;
+        }
+        header {
+            height: 80px;
+            border-bottom: 1px solid #e2e8f0;
+        }
