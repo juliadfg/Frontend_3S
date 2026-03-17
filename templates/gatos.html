@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<div id="breeds-container">
+
+    {% if gatos %}
+
+    {% for gato in gatos %}
+    <article class="breed-card d-flex flex-column flex-md-row" data-purpose="breed-card">
+        <div class="breed-card-img-container">
+            <img alt="Abyssinian Cat" class="breed-card-img"
+                 src = "{{ gato.image }}"/>
+        </div>
+        <div class="p-4 flex-grow-1 d-flex flex-column justify-content-between">
+            <div>
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h2 class="h3 fw-bold text-dark mb-0">{{ gato.name }}</h2>
+                    <div class="d-flex align-items-center text-danger" title="High Affection Level">
+                        <svg class="me-1" fill="currentColor" height="18" viewbox="0 0 20 20" width="18">
+                            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"></path>
+                        </svg>
+                        <span class="small fw-bold">Affectionate</span>
+                    </div>
+                </div>
+                <p class="text-secondary small mb-4">
+                    The Abyssinian is easy to care for, and a joy to have in your home. They’re affectionate cats and
+                    love both people and other animals.
+                </p>
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                    {% for temperamento in gato.temperament %}
+                        <span class="tag-pill">{{ temperamento }}</span>
+
+                    {% endfor %}
+                </div>
+                <div class="row text-center text-md-start border-top pt-3 mb-4 g-2">
+                    <div class="col-4">
+                        <div class="stat-label">Origin:
+                        <div class="stat-value"> {{ gato.origin }}</div>
+                    </div>
+                    <div class="col-4">
+                        <div class="stat-label">Life Span:
+                        <div class="stat-value">{{ gato.life_span }}</div>
+                    </div>
+                    <div class="col-4">
+                        <div class="stat-label">Weight:
+                        <div class="stat-value">{{ gato.weight.metric }}</div>
+                    </div>
+                </div>
+            </div>
+            <div style="max-width: 200px;">
+                <button class="btn btn-learn-more w-100 d-flex align-items-center justify-content-center gap-2">
+                    Learn More
+                    <svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16">
+                        <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </article>
+
+    {% endfor %}
+    {% else %}
+    <h3>Nenhum Gato</h3>
+    {% endif %}
+
+
+</div>
+{% endblock %}
